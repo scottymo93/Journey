@@ -1,0 +1,49 @@
+@model  Pin
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    
+</head>
+
+<h2> @Model.PinName </h2>
+
+<div id="map" style="height: 500px"></div>
+
+<script>
+    
+    var map = L.map('map').setView([@Model.PinLat, @Model.PinLong], 13);
+    L.marker([@Model.PinLat,@Model.PinLong]).addTo(map);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+    </script>
+
+<table class="table">
+    <tr>
+        <th> Image </th>
+        <th> Journal Entry </th>
+    </tr>
+    <tr>
+        <td> @Model.PinImage </td>
+        <th> @Model.PinJournal </th>
+    </tr>
+</table>
+
+<div style="display: block">
+    <a href="/Pin/UpdatePin/@Model.PinId">Update this Pin</a>
+</div>
+
+<div style="display: block">
+
+    @using (Html.BeginForm("DeletePin", "Pin", "Post"))
+    {
+        <input type="hidden" asp-for="PinId" value="@Model.PinId" />
+        <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this pin" />
+    }
+</div>
