@@ -36,7 +36,6 @@
 /Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/scopedcss/bundle/Journey.styles.css
 /Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/scopedcss/projectbundle/Journey.bundle.scp.css
-/Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/compressed/zsep88lwlm-lugek5hnai.gz
 /Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/compressed/dg6vfwke0z-61n19gt1b8.gz
 /Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/compressed/r94i5cd84a-fr7q2aak1r.gz
 /Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/compressed/ho68zd89un-bqjiyaj88i.gz
@@ -110,3 +109,6 @@
 /Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/Journey.pdb
 /Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/Journey.genruntimeconfig.cache
 /Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/ref/Journey.dll
+/Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/Journey.sourcelink.json
+/Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/compressed/efsffldldb-k2tmtsvrtv.gz
+/Users/scott/Desktop/repos/Journey/Journey/obj/Debug/net9.0/compressed/zsep88lwlm-k2j9uzxbfg.gz

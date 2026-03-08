@@ -3,16 +3,16 @@
 
 <h2>Create a New Pin</h2>
 
-@using (Html.BeginForm("CreatePin", "Pin", FormMethod.Post))
+@using (Html.BeginForm("InsertPinToDatabase", "Pin", FormMethod.Post))
 {
 
-    <div id="map" style="height: 500px;"></div>
+    <div class="one" id="map" style="height: 500px;"></div>
 
     <script>
         var lat = @((Model?.PinLat ?? 37.7749).ToString(System.Globalization.CultureInfo.InvariantCulture));
-        var lng = @((Model?.PinLong ?? 22.4194).ToString(System.Globalization.CultureInfo.InvariantCulture));
+        var lng = @((Model?.PinLong ?? -122.4194).ToString(System.Globalization.CultureInfo.InvariantCulture));
 
-    var map = L.map('map').setView([lat, lng], 15);
+    var map = L.map('map').setView([lat, lng], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
@@ -48,8 +48,10 @@
     <label asp-for="PinJournal" class="control-label">Journal Entry</label>
     <input type="text" name="PinJournal" class="form-control" value="" />
 
-    <label asp-for="PinImage" class="control-label">Image</label>
-    <input type="text" name="PinImage" class="form-control" value="" />
+    <label>Upload Image</label>
+    <input type="file" name="ImageFile" accept="image/*" />
+    @* $1$ <label asp-for="PinImage" class="control-label">Image</label> #1# *@
+    @* $1$ <input type="text" name="PinImage" class="form-control" value="" /> #1# *@
 
 
     <input type="submit" value="Create Pin" class="btn btn-primary" />

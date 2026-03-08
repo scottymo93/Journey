@@ -7,12 +7,12 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
-    
+   
 </head>
 
-<h2> @Model.PinName </h2>
+<h2 class="text-center"> @Model.PinName </h2>
 
-<div id="map" style="height: 500px"></div>
+<div class="one" id="map" style="height: 500px"></div>
 
 <script>
     
@@ -26,24 +26,23 @@
 
 <table class="table">
     <tr>
-        <th> Image </th>
+        @* <th> Image </th> *@
         <th> Journal Entry </th>
     </tr>
     <tr>
-        <td> @Model.PinImage </td>
-        <th> @Model.PinJournal </th>
+        @* <td> <img href="wwwroot/@Model.ImagePath"></td> *@
+        <td> @Model.PinJournal </td>
     </tr>
 </table>
 
-<div style="display: block">
-    <a href="/Pin/UpdatePin/@Model.PinId">Update this Pin</a>
+<div class="text-center">
+    <a class="btn btn-primary" href="/Pin/UpdatePin/@Model.PinId">Update this Pin</a>
 </div>
 
-<div style="display: block">
-
+<div class="text-center">
     @using (Html.BeginForm("DeletePin", "Pin", "Post"))
     {
         <input type="hidden" asp-for="PinId" value="@Model.PinId" />
-        <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this pin" />
+        <input class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')" value="Delete this pin" />
     }
 </div>

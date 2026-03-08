@@ -1,58 +1,32 @@
 @model IEnumerable<Pin>
 
-<head>
+<head xmlns="http://www.w3.org/1999/html">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
+    <link rel="stylesheet" href="~/Journey.styles.css"/>
 </head>
+<body></body>
+<h2 class="text-center">Pins</h2>
 
-<h2>Pins</h2>
-
-<div style="display: block">
-    <a href="/Pin/CreatePin/">Create a New Pin</a>
+<div style="display: block" class="text-center">
+    <a class ="btn btn-primary" href="/Pin/CreatePin/">Create a New Pin</a>
 </div>
 
-<div id="map" style="height: 500px;"></div>
-
-@* <script> *@
-@*     var pins = @Html.Raw( *@
-@*                    System.Text.Json.JsonSerializer.Serialize(Model) *@
-@*                ); *@
-@* *@
-@*     console.log("Pins:", pins); *@
-@* *@
-@*     var map = L.map('map'); *@
-@* *@
-@*     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { *@
-@*         maxZoom: 19 *@
-@*     }).addTo(map); *@
-@* *@
-@*     var bounds = L.latLngBounds(); *@
-@* *@
-@*     pins.forEach(p => { *@
-@*         if (p.Latitude && p.Longitude) { *@
-@*             var lat = Number(p.Latitude); *@
-@*             var lng = Number(p.Longitude); *@
-@*             L.marker([lat, lng]).addTo(map); *@
-@*             bounds.extend([lat, lng]); *@
-@*         } *@
-@*     }); *@
-@* *@
-@*     if (bounds.isValid()) { *@
-@*         map.fitBounds(bounds); *@
-@*     } *@
-@* </script> *@
+<div class="one" id="map" style="height: 500px;">
 
 <script>
+    // Model → JS
     var pins = @Html.Raw(
                    System.Text.Json.JsonSerializer.Serialize(Model)
                );
 
     console.log("Pins:", pins);
 
+    // Create map
     var map = L.map('map').setView([39.5, -98.35], 4);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -61,75 +35,51 @@
 
     var bounds = L.latLngBounds();
 
-    pins.forEach(p => {
-        if (!isNaN(p.Latitude) && !isNaN(p.Longitude)) {
+    pins.forEach(function (pin) {
+        // Guard against bad data
+        if (pin.PinLat != null && pin.PinLong != null) {
 
-            var lat = Number(p.Latitude);
-            var lng = Number(p.Longitude);
+            var lat = Number(pin.PinLat);
+            var lng = Number(pin.PinLong);
 
-            L.marker([lat, lng]).addTo(map);
-            bounds.extend([lat, lng]);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                var marker = L.marker([lat, lng])
+                    .addTo(map)
+                    .bindPopup(
+                        `<strong>${pin.PinName}</strong><br/>${pin.PinJournal ?? ""}`
+                    );
+                marker.on("click", function () {
+                    window.location.href = `/Pin/ViewPin/${pin.PinId}`;
+                });
+
+                bounds.extend([lat, lng]);
+            }
         }
     });
 
+    // Auto-zoom to pins
     if (bounds.isValid()) {
         map.fitBounds(bounds, { padding: [40, 40] });
     }
+    
 </script>
+</div>
 
-
-
-@* <div id="map" style="height: 500px; width:100%;"></div> *@
-@*     <script> var pins =  @Html.Raw( *@
-@*                              System.Text.Json.JsonSerializer.Serialize(Model)); *@
-@*     </script> *@
-@* *@
-@* *@
-@* <script> *@
-@*     var map = L.map('map'); *@
-@* *@
-@*     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { *@
-@*         maxZoom: 19 *@
-@*     }).addTo(map); *@
-@* *@
-@*     var bounds = L.latLngBounds(); *@
-@*      *@
-@*     pins.forEach(function (pin) { *@
-@*         if (pin.Latitude && pin.Longitude) { *@
-@*             var marker = L.marker([pin.Latitude, pin.Longitude]) *@
-@*                 .addTo(map) *@
-@*                 .bindPopup(pin.journalEntry || "Journal Entry"); *@
-@* *@
-@*             bounds.extend(marker.getLatLng()); *@
-@*         } *@
-@*     }); *@
-@* *@
-@*     // Fit map to markers *@
-@*     if (bounds.isValid()) { *@
-@*         map.fitBounds(bounds, { *@
-@*             padding: [50, 50] *@
-@*         }); *@
-@*     } else { *@
-@*         // Fallback if no pins *@
-@*         map.setView([39.5, -98.35], 4); // US center *@
-@*     } *@
-@* </script> *@
-
-<table>
+<table class="table table-striped">
     <tr>
-        <th> Id </th>
+        @* <th> Id </th> *@
         <th> Name </th>
         <th> Journal Entry </th>
-        <th> Image </th>
+        @* <th> Image </th> *@
     </tr>
     
     @foreach (var pin in @Model)
     {
         <tr>
-            <td><a href="/Pin/ViewPin/@pin.PinId">@pin.PinId</a></td>
+            @* <td class="col-sm-2"><a href="/Pin/ViewPin/@pin.PinId">@pin.PinId</a></td> *@
             <td><a href="/Pin/ViewPin/@pin.PinId">@pin.PinName</a></td>
-            <td>@pin.PinJournal</td>
-            <td>@pin.PinImage</td>
+            <td class="col-sm-6">@pin.PinJournal</td>
+            @* <td><img src="@pin.ImagePath" width="300" /></td> *@
         </tr>
     }
     

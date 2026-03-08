@@ -1,12 +1,64 @@
-﻿@{
+﻿@model IEnumerable<Pin>
+
+@{
     ViewData["Title"] = "Home Page";
 }
-
-
-
-
-
+<body>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to the Journey Journal</h1>
+    <div class="one" id="map" style="height: 500px;">
+        <script>
+    // Model → JS
+    var pins = @Html.Raw(
+                   System.Text.Json.JsonSerializer.Serialize(Model)
+               );
+
+    // console.log("Pins:", pins);
+
+    // Create map
+    var map = L.map('map').setView([39.5, -98.35], 4);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+
+    var bounds = L.latLngBounds();
+    // var marker;
+    pins.forEach(function (pin) {
+        // Guard against bad data
+        if (pin.PinLat != null && pin.PinLong != null) {
+
+            var lat = Number(pin.PinLat);
+            var lng = Number(pin.PinLong);
+
+            if (!isNaN(lat) && !isNaN(lng)) {
+                var marker = L.marker([lat, lng])
+                    .addTo(map)
+                    .bindPopup(
+                        `<strong>${pin.PinName}</strong><br/>${pin.PinJournal ?? ""}`
+                    );
+                marker.on("click", function () {
+                    window.location.href = `/Pin/ViewPin/${pin.PinId}`;
+                });
+
+                bounds.extend([lat, lng]);
+            }
+        }
+    });
+    
+    
+    // Auto-zoom to pins
+    if (bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [40, 40] });
+    }
+</script>
+    </div>
+    
+    
+    <p>Pin count: @Model.Count()</p>
+    
+    <p>Click on Journal Entries to view all pins, or click a Pin to explore.</p>
+
+    @* <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
 </div>
+</body>

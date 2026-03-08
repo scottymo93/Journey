@@ -10,7 +10,7 @@ public interface IPinRepository
     public void UpdatePin(Pin pinToUpdate);
     public void InsertPin(Pin pinToInsert);
     
-    public Pin CreatePin();
+    public Pin CreatePin(Pin newPin);
     
     public void DeletePin(Pin pin);
     

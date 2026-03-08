@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Journey.Data;
 using Microsoft.AspNetCore.Mvc;
 using Journey.Models;
 
@@ -6,16 +7,24 @@ namespace Journey.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    // private readonly ILogger<HomeController> _logger;
+    //
+    // public HomeController(ILogger<HomeController> logger)
+    // {
+    //     _logger = logger;
+    // }
 
-    public HomeController(ILogger<HomeController> logger)
+    private readonly IPinRepository _pinRepository;
+
+    public HomeController(IPinRepository pinRepository)
     {
-        _logger = logger;
+        _pinRepository = pinRepository;
     }
-
+    
     public IActionResult Index()
     {
-        return View();
+        var pins = _pinRepository.GetAllPins();
+        return View(pins);
     }
 
     public IActionResult Privacy()

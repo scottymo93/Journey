@@ -14,7 +14,7 @@
 @using (Html.BeginForm("UpdatePinToDatabase", "Pin", "Post"))
 {
 
-<div id="map" style="height: 500px"></div>
+<div class="one" id="map" style="height: 500px"></div>
   
 <script>
     var lat = @Model.PinLat;
@@ -56,10 +56,12 @@
     <label asp-for="PinJournal" class="control-label">Journal Entry</label>
     <input type="text" name="PinJournal" class="form-control" value="@Model.PinJournal" />
     
-    <label asp-for="PinImage" class="control-label">Image</label>
-    <input type="text" name="PinImage" class="form-control" value="@Model.PinImage" />
+    @* <label asp-for="PinImage" class="control-label">Image</label> *@
+    @* <input type="file" name="imageFile" accept="image/*" /> *@
+    
+    @* <input type="text" name="PinImage" class="form-control" value="@Model.PinImage" /> *@
 
-    <input type="submit" value="Update Product" class="btn btn-primary" />
+    <input type="submit" value="Update Pin" class="btn btn-primary" />
     
 
 }
