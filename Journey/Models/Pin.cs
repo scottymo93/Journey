@@ -11,5 +11,7 @@ public class Pin
     
     public string ImagePath { get; set; }
     
+    public IFormFile ImageFile { get; set; }
+    
     // public IFormFile ImageFile { get; set; }
 }
