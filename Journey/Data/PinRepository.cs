@@ -33,10 +33,10 @@ public class PinRepository : IPinRepository
     public void UpdatePin(Pin pinToUpdate)
     {
         _connection.Execute(
-            "UPDATE pins SET pinName=@pinName, pinJournal=@pinJournal, pinImage=@pinImage, pinLong=@pinLong, pinLat=@pinLat, imagePath=@imagePath WHERE pinID = @pinID",
+            "UPDATE pins SET pinName=@pinName, pinJournal=@pinJournal, pinLong=@pinLong, pinLat=@pinLat, imagePath=@imagePath WHERE pinID = @pinID",
             new
             {
-                pinName = pinToUpdate.PinName, pinJournal = pinToUpdate.PinJournal, pinImage = pinToUpdate.PinImage,
+                pinName = pinToUpdate.PinName, pinJournal = pinToUpdate.PinJournal,
                 pinLong = pinToUpdate.PinLong, pinLat = pinToUpdate.PinLat, imagePath = pinToUpdate.ImagePath, pinID = pinToUpdate.PinId
             });
     }
@@ -44,10 +44,10 @@ public class PinRepository : IPinRepository
     public void InsertPin(Pin pinToInsert)
     {
         _connection.Execute(
-            "INSERT INTO pins (pinName, pinJournal, pinImage, pinLong, pinLat, imagePath) VALUES (@pinName, @pinJournal, @pinImage, @pinLong, @pinLat, @imagePath);",
+            "INSERT INTO pins (pinName, pinJournal, pinLong, pinLat, imagePath) VALUES (@pinName, @pinJournal, @pinLong, @pinLat, @imagePath);",
             new
             {
-                pinName = pinToInsert.PinName, pinJournal = pinToInsert.PinJournal, pinImage = pinToInsert.PinImage,
+                pinName = pinToInsert.PinName, pinJournal = pinToInsert.PinJournal, 
                 pinLong = pinToInsert.PinLong, pinLat = pinToInsert.PinLat, imagePath = pinToInsert.ImagePath, pinID = pinToInsert.PinId
             });
         
@@ -69,10 +69,10 @@ public class PinRepository : IPinRepository
     public Pin CreatePin(Pin newPin)
     {
         _connection.Execute(
-            "INSERT INTO pins (pinName, pinJournal, pinImage, pinLong, pinLat, pinID, imagePath) VALUES (@pinName, @pinJournal, @pinImage, @pinLong, @pinLat, @pinID, @imagePath);",
+            "INSERT INTO pins (pinName, pinJournal, pinLong, pinLat, pinID, imagePath) VALUES (@pinName, @pinJournal, @pinLong, @pinLat, @pinID, @imagePath);",
             new
             {
-                pinName = newPin.PinName, pinJournal = newPin.PinJournal, pinImage = newPin.PinImage,
+                pinName = newPin.PinName, pinJournal = newPin.PinJournal, 
                 pinLong = newPin.PinLong, pinLat = newPin.PinLat, pinID = newPin.PinId, imagePath = newPin.ImagePath
             });
         return newPin;

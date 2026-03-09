@@ -7,7 +7,7 @@ public class Pin
     public double PinLong { get; set; }
     public string PinName { get; set; }
     public string PinJournal { get; set; }
-    public string PinImage { get; set; }
+    // public string PinImage { get; set; }
     
     public string ImagePath { get; set; }
     

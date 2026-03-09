@@ -36,9 +36,67 @@ public class PinController : Controller
         return View(pin);
     }
 
-    public IActionResult UpdatePinToDatabase(Pin pin)
+    // public IActionResult UpdatePinToDatabase(Pin pin)
+    // {
+    //     _pinRepository.UpdatePin(pin);
+    //     return RedirectToAction("ViewPin", new { id = pin.PinId });
+    // }
+    
+    [HttpPost]
+    public async Task<IActionResult> UpdatePinToDatabase(Pin pin)
     {
+        // Get the existing pin from the database
+        var existingPin = _pinRepository.GetPinById(pin.PinId);
+
+        if (existingPin == null)
+            return RedirectToAction("Index");
+
+        if (pin.ImageFile != null && pin.ImageFile.Length > 0)
+        {
+            string uploadsFolder = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot/images/pins"
+            );
+
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
+            // 🗑 DELETE OLD IMAGE
+            if (!string.IsNullOrEmpty(existingPin.ImagePath))
+            {
+                string oldImagePath = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "wwwroot",
+                    existingPin.ImagePath.TrimStart('/')
+                );
+
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
+
+            // 📷 SAVE NEW IMAGE
+            string fileName = Guid.NewGuid().ToString()
+                              + Path.GetExtension(pin.ImageFile.FileName);
+
+            string filePath = Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await pin.ImageFile.CopyToAsync(stream);
+            }
+
+            pin.ImagePath = "/images/pins/" + fileName;
+        }
+        else
+        {
+            // Keep existing image if no new one uploaded
+            pin.ImagePath = existingPin.ImagePath;
+        }
+
         _pinRepository.UpdatePin(pin);
+
         return RedirectToAction("ViewPin", new { id = pin.PinId });
     }
     
@@ -73,46 +131,77 @@ public class PinController : Controller
         return RedirectToAction("Index");
     }
 
-    public IActionResult UploadImageCreatePin(Pin pin, IFormFile imageFile)
+    // public IActionResult UploadImageCreatePin(Pin pin, IFormFile imageFile)
+    // {
+    //     if (!ModelState.IsValid)
+    //         return RedirectToAction("ViewPin", new { id = pin.PinId });
+    //     
+    //     if (imageFile != null && imageFile.Length > 0)
+    //     {
+    //         // 1️⃣ Where images will live
+    //         string uploadsFolder = Path.Combine(
+    //             Directory.GetCurrentDirectory(),
+    //             "wwwroot/images/pins"
+    //         );
+    //
+    //         // 2️⃣ Ensure folder exists
+    //         if (!Directory.Exists(uploadsFolder))
+    //             Directory.CreateDirectory(uploadsFolder);
+    //
+    //         // 3️⃣ Generate unique file name
+    //         string fileName = Guid.NewGuid().ToString()
+    //                           + Path.GetExtension(imageFile.FileName);
+    //
+    //         // 4️⃣ Full physical path
+    //         string filePath = Path.Combine(uploadsFolder, fileName);
+    //
+    //         // 5️⃣ Save file to disk
+    //         using (var stream = new FileStream(filePath, FileMode.Create))
+    //         {
+    //             imageFile.CopyToAsync(stream);
+    //         }
+    //
+    //         // 6️⃣ Save path to database
+    //         pin.ImagePath = "/images/pins/" + fileName;
+    //     }
+    //
+    //     // _pinRepository.Pins.Add(pin);
+    //     // await _pinRepository.SaveChangesAsync();
+    //     
+    //     _pinRepository.InsertPin(pin);
+    //     
+    //     return RedirectToAction("ViewPin", new { id = pin.PinId });
+    // }
+    
+    [HttpPost]
+    public async Task<IActionResult> CreatePin(Pin pin)
     {
-        if (!ModelState.IsValid)
-            return RedirectToAction("ViewPin", new { id = pin.PinId });
-        
-        if (imageFile != null && imageFile.Length > 0)
+        if (pin.ImageFile != null && pin.ImageFile.Length > 0)
         {
-            // 1️⃣ Where images will live
             string uploadsFolder = Path.Combine(
                 Directory.GetCurrentDirectory(),
                 "wwwroot/images/pins"
             );
 
-            // 2️⃣ Ensure folder exists
             if (!Directory.Exists(uploadsFolder))
                 Directory.CreateDirectory(uploadsFolder);
 
-            // 3️⃣ Generate unique file name
             string fileName = Guid.NewGuid().ToString()
-                              + Path.GetExtension(imageFile.FileName);
+                              + Path.GetExtension(pin.ImageFile.FileName);
 
-            // 4️⃣ Full physical path
             string filePath = Path.Combine(uploadsFolder, fileName);
 
-            // 5️⃣ Save file to disk
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                imageFile.CopyToAsync(stream);
+                await pin.ImageFile.CopyToAsync(stream);
             }
 
-            // 6️⃣ Save path to database
             pin.ImagePath = "/images/pins/" + fileName;
         }
 
-        // _pinRepository.Pins.Add(pin);
-        // await _pinRepository.SaveChangesAsync();
-        
         _pinRepository.InsertPin(pin);
-        
-        return RedirectToAction("ViewPin", new { id = pin.PinId });
+
+        return RedirectToAction("Index");
     }
 
 }
