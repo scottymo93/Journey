@@ -54,18 +54,6 @@ public class PinRepository : IPinRepository
         
     }
     
-
-    // public int InsertPin(Pin pin)
-    // {
-    //     var sql = @"
-    //     INSERT INTO pins (PinName, PinJournal, PinImage, PinLat, PinLong)
-    //     OUTPUT INSERTED.PinId
-    //     VALUES (@PinName, @PinJournal, @PinImage, @PinLat, @PinLong);
-    // ";
-    //
-    //     return _connection.QuerySingle<int>(sql, pin);
-    // }
-
     public Pin CreatePin(Pin newPin)
     {
         _connection.Execute(

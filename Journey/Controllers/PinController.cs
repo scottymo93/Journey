@@ -35,12 +35,7 @@ public class PinController : Controller
         }
         return View(pin);
     }
-
-    // public IActionResult UpdatePinToDatabase(Pin pin)
-    // {
-    //     _pinRepository.UpdatePin(pin);
-    //     return RedirectToAction("ViewPin", new { id = pin.PinId });
-    // }
+    
     
     [HttpPost]
     public async Task<IActionResult> UpdatePinToDatabase(Pin pin)
@@ -130,48 +125,6 @@ public class PinController : Controller
         _pinRepository.DeletePin(pin);
         return RedirectToAction("Index");
     }
-
-    // public IActionResult UploadImageCreatePin(Pin pin, IFormFile imageFile)
-    // {
-    //     if (!ModelState.IsValid)
-    //         return RedirectToAction("ViewPin", new { id = pin.PinId });
-    //     
-    //     if (imageFile != null && imageFile.Length > 0)
-    //     {
-    //         // 1️⃣ Where images will live
-    //         string uploadsFolder = Path.Combine(
-    //             Directory.GetCurrentDirectory(),
-    //             "wwwroot/images/pins"
-    //         );
-    //
-    //         // 2️⃣ Ensure folder exists
-    //         if (!Directory.Exists(uploadsFolder))
-    //             Directory.CreateDirectory(uploadsFolder);
-    //
-    //         // 3️⃣ Generate unique file name
-    //         string fileName = Guid.NewGuid().ToString()
-    //                           + Path.GetExtension(imageFile.FileName);
-    //
-    //         // 4️⃣ Full physical path
-    //         string filePath = Path.Combine(uploadsFolder, fileName);
-    //
-    //         // 5️⃣ Save file to disk
-    //         using (var stream = new FileStream(filePath, FileMode.Create))
-    //         {
-    //             imageFile.CopyToAsync(stream);
-    //         }
-    //
-    //         // 6️⃣ Save path to database
-    //         pin.ImagePath = "/images/pins/" + fileName;
-    //     }
-    //
-    //     // _pinRepository.Pins.Add(pin);
-    //     // await _pinRepository.SaveChangesAsync();
-    //     
-    //     _pinRepository.InsertPin(pin);
-    //     
-    //     return RedirectToAction("ViewPin", new { id = pin.PinId });
-    // }
     
     [HttpPost]
     public async Task<IActionResult> CreatePin(Pin pin)
