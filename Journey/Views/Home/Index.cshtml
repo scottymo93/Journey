@@ -37,10 +37,12 @@
                     .bindPopup(
                         `<strong>${pin.PinName}</strong><br/>${pin.PinJournal ?? ""}`
                     );
+                // marker.on('hover', function () {
+                //     marker.bindPopup(`<strong>${pin.PinName}</strong><br/>${pin.PinJournal ?? ""}`)
+                // })
                 marker.on("click", function () {
                     window.location.href = `/Pin/ViewPin/${pin.PinId}`;
                 });
-
                 bounds.extend([lat, lng]);
             }
         }

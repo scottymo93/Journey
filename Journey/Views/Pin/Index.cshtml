@@ -43,7 +43,7 @@
             var lng = Number(pin.PinLong);
 
             if (!isNaN(lat) && !isNaN(lng)) {
-                var marker = L.marker([lat, lng])
+                let marker = L.marker([lat, lng])
                     .addTo(map)
                     .bindPopup(
                         `<strong>${pin.PinName}</strong><br/>${pin.PinJournal ?? ""}`
@@ -51,7 +51,7 @@
                 marker.on("click", function () {
                     window.location.href = `/Pin/ViewPin/${pin.PinId}`;
                 });
-
+                
                 bounds.extend([lat, lng]);
             }
         }
@@ -70,7 +70,7 @@
         @* <th> Id </th> *@
         <th> Name </th>
         <th> Journal Entry </th>
-        @* <th> Image </th> *@
+        <th> Image </th>
     </tr>
     
     @foreach (var pin in @Model)
@@ -79,7 +79,7 @@
             @* <td class="col-sm-2"><a href="/Pin/ViewPin/@pin.PinId">@pin.PinId</a></td> *@
             <td><a href="/Pin/ViewPin/@pin.PinId">@pin.PinName</a></td>
             <td class="col-sm-6">@pin.PinJournal</td>
-            @* <td><img src="@pin.ImagePath" width="300" /></td> *@
+            <td><img src="@pin.ImagePath" width="300" /></td>
         </tr>
     }
     
