@@ -4,14 +4,14 @@
     "/Users/scott/Desktop/repos/Journey/JourneyMethodsTests/JourneyMethodsTests.csproj": {}
   },
   "projects": {
-    "/Users/scott/Desktop/repos/Journey/JourneyMethodsTests/JourneyMethodsTests.csproj": {
+    "/Users/scott/Desktop/repos/Journey/Journey/Journey.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/scott/Desktop/repos/Journey/JourneyMethodsTests/JourneyMethodsTests.csproj",
-        "projectName": "JourneyMethodsTests",
-        "projectPath": "/Users/scott/Desktop/repos/Journey/JourneyMethodsTests/JourneyMethodsTests.csproj",
+        "projectUniqueName": "/Users/scott/Desktop/repos/Journey/Journey/Journey.csproj",
+        "projectName": "Journey",
+        "projectPath": "/Users/scott/Desktop/repos/Journey/Journey/Journey.csproj",
         "packagesPath": "/Users/scott/.nuget/packages/",
-        "outputPath": "/Users/scott/Desktop/repos/Journey/JourneyMethodsTests/obj/",
+        "outputPath": "/Users/scott/Desktop/repos/Journey/Journey/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/scott/.nuget/NuGet/NuGet.Config"
@@ -44,9 +44,89 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.66, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[9.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/scott/Desktop/repos/Journey/JourneyMethodsTests/JourneyMethodsTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/scott/Desktop/repos/Journey/JourneyMethodsTests/JourneyMethodsTests.csproj",
+        "projectName": "JourneyMethodsTests",
+        "projectPath": "/Users/scott/Desktop/repos/Journey/JourneyMethodsTests/JourneyMethodsTests.csproj",
+        "packagesPath": "/Users/scott/.nuget/packages/",
+        "outputPath": "/Users/scott/Desktop/repos/Journey/JourneyMethodsTests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/scott/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/scott/Desktop/repos/Journey/Journey/Journey.csproj": {
+                "projectPath": "/Users/scott/Desktop/repos/Journey/Journey/Journey.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.12.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.72, )"
             },
             "coverlet.collector": {
               "target": "Package",

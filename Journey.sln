@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Journey", "Journey\Journey.csproj", "{BA2DB4A5-25D2-43B1-89D8-DE89A01E7E43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JourneyMethodsTests", "JourneyMethodsTests\JourneyMethodsTests.csproj", "{8428301A-0C7E-4757-A204-1FBB839F1C12}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,9 +12,5 @@ Global
 		{BA2DB4A5-25D2-43B1-89D8-DE89A01E7E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA2DB4A5-25D2-43B1-89D8-DE89A01E7E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA2DB4A5-25D2-43B1-89D8-DE89A01E7E43}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8428301A-0C7E-4757-A204-1FBB839F1C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8428301A-0C7E-4757-A204-1FBB839F1C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8428301A-0C7E-4757-A204-1FBB839F1C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8428301A-0C7E-4757-A204-1FBB839F1C12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
