@@ -54,17 +54,17 @@ public class PinRepository : IPinRepository
         
     }
     
-    public Pin CreatePin(Pin newPin)
-    {
-        _connection.Execute(
-            "INSERT INTO pins (pinName, pinJournal, pinLong, pinLat, pinID, imagePath) VALUES (@pinName, @pinJournal, @pinLong, @pinLat, @pinID, @imagePath);",
-            new
-            {
-                pinName = newPin.PinName, pinJournal = newPin.PinJournal, 
-                pinLong = newPin.PinLong, pinLat = newPin.PinLat, pinID = newPin.PinId, imagePath = newPin.ImagePath
-            });
-        return newPin;
-    }
+    // public Pin CreatePin(Pin newPin)
+    // {
+    //     _connection.Execute(
+    //         "INSERT INTO pins (pinName, pinJournal, pinLong, pinLat, pinID, imagePath) VALUES (@pinName, @pinJournal, @pinLong, @pinLat, @pinID, @imagePath);",
+    //         new
+    //         {
+    //             pinName = newPin.PinName, pinJournal = newPin.PinJournal, 
+    //             pinLong = newPin.PinLong, pinLat = newPin.PinLat, pinID = newPin.PinId, imagePath = newPin.ImagePath
+    //         });
+    //     return newPin;
+    // }
 
     public void DeletePin(Pin pin)
     {

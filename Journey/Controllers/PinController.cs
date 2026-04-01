@@ -115,11 +115,6 @@ public class PinController : Controller
         return View("CreatePin");
     }
 
-    // public IActionResult ViewNewPin(Pin newPin)
-    // {
-    //     return View(newPin);
-    // }
-
     public IActionResult DeletePin(Pin pin)
     {
         _pinRepository.DeletePin(pin);

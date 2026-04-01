@@ -18,7 +18,6 @@ builder.Services.AddScoped<IDbConnection>((s) =>
 
 builder.Services.AddTransient<IPinRepository, PinRepository>();
 
-
 //
 
 var app = builder.Build();
